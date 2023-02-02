@@ -1,2 +1,2 @@
-# Circle_Game
+# Circle Game
 Simple 2D game
