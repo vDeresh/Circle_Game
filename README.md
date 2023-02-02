@@ -3,6 +3,11 @@ Simple 2D bullet dodging game
 
 ---
 
+## Known issues
+- None
+
+---
+
 ## Version 1.1 coming soon!
 - Heart icons instead of HP numeric display
 - Customizable game window size
