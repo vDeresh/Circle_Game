@@ -7,7 +7,8 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 - Run `installer64.bat` if you have 64-bit system or run `installer32.bat` if you have 32-bit system
 
 # Known issues
-- After restarting the game, a blank screen appears
+- After restarting the game, a blank screen appears (fixed in the next version)
+- The game window is strangely offset on some monitors (fixed in the next version)
 
 # Version plans
 
