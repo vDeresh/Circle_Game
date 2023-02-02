@@ -15,3 +15,9 @@ Simple 2D bullet dodging game
 ## Version 1.2 plans
 - Add soundtrack
 - Add sound effects
+
+## Version 1.3 plans
+- Powerups
+
+## Other plans
+- Multiplayer
