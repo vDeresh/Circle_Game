@@ -19,5 +19,5 @@ Simple 2D bullet dodging game
 ## Version 1.3 plans
 - Powerups
 
-## Other plans
+## Other version plans
 - Multiplayer
