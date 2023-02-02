@@ -4,7 +4,7 @@ Simple 2D bullet dodging game
 ---
 
 ## Known issues
-- After restarting the game, a blank screen appears
+- After losing a restarted game, the game freezes
 
 ---
 
