@@ -12,7 +12,7 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 ## Windows can show warning after running .bat files but you can just click `More info` and then run it (you can check the files code if you want)
 
 # How to play
-- Simply run `start.pyw`
+- Simply run `game.pyw`
 - Choose a [difficulty level](https://github.com/vDeresh/Circle_Game/wiki/Home/#difficulty-levels) and optional [special modes](https://github.com/vDeresh/Circle_Game/wiki#special-modes)
 - Click `Play` button
 
