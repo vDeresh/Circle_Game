@@ -3,7 +3,6 @@ import os
 import random
 import json
 import webbrowser
-import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5 import QtGui
