@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\user\Synchro\Kod\Python\Gry\Circle Game\files\config_menu.ui'
+# Form implementation generated from reading ui file 'c:\Users\user\Synchro\Kod\Python\Gry\Circle Game\Source code\files\config_menu.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.8
 #
@@ -34,8 +34,8 @@ class Ui_MainWindow(object):
         self.playButton.setChecked(False)
         self.playButton.setAutoRepeat(False)
         self.playButton.setAutoExclusive(False)
-        self.playButton.setAutoDefault(False)
-        self.playButton.setDefault(False)
+        self.playButton.setAutoDefault(True)
+        self.playButton.setDefault(True)
         self.playButton.setFlat(False)
         self.playButton.setObjectName("playButton")
         self.diffBox = QtWidgets.QComboBox(self.centralwidget)

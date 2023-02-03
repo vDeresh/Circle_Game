@@ -10,6 +10,8 @@ from PyQt5 import QtGui
 pygame.init()
 pygame.font.init()
 
+pygame.mouse.set_visible(False)
+
 info = pygame.display.Info()
 
 print(f"Window width: {info.current_w}, {info.current_h}")
@@ -19,7 +21,7 @@ WINDOW_WIDTH, WINDOW_HEIGHT = info.current_w, info.current_h
 WIN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.NOFRAME)
 # Ustawienia okna
 pygame.display.set_caption("Circle Game")
-pygame.display.set_icon(pygame.image.load(os.path.join('files', 'icon.png')))
+pygame.display.set_icon(pygame.image.load(os.path.join('files', 'icon.ico')))
 
 # Kolory
 MAIN_COLOR = (0, 0, 14)
@@ -28,14 +30,17 @@ WHITE = (255, 255, 255)
 SMOKED_WHITE = (192, 192, 192)
 LESS_SMOKED_WHITE = (210, 210, 210)
 
-# Ustawienie czasu odświeżania gry wykorzystane w linii 32 (i 29)
-FPS	= 60
-
 # Inne ustawienia
 SMALL_FONT = pygame.font.Font(os.path.join("files", "PixelEmulator-xq08.ttf"), 16)
 MEDIUM_FONT = pygame.font.Font(os.path.join("files", "PixelEmulator-xq08.ttf"), 24)
 MAIN_FONT = pygame.font.Font(os.path.join("files", "PixelEmulator-xq08.ttf"), 32)
 BIG_FONT = pygame.font.Font(os.path.join("files", "PixelEmulator-xq08.ttf"), 48)
+LASER_SOUND = pygame.mixer.Sound(os.path.join('files', 'sounds', 'laser.wav'))
+LOSE_SOUND = pygame.mixer.Sound(os.path.join('files', 'sounds', 'lose.wav'))
+POSITIVE_SOUND = pygame.mixer.Sound(os.path.join('files', 'sounds', 'positive.wav'))
+QUIT_SOUND = pygame.mixer.Sound(os.path.join('files', 'sounds', 'quitting.wav'))
+
+FPS	= 60
 
 # Eventy
 PLAYER_WAS_HIT = pygame.USEREVENT + 1
@@ -43,6 +48,10 @@ PLAYER_WAS_HIT = pygame.USEREVENT + 1
 # Tekstury
 PLAYER_IMG = pygame.image.load(os.path.join("files", "player_circle.png"))
 PLAYER_IMG = pygame.transform.scale(PLAYER_IMG, (WINDOW_WIDTH//19.2, WINDOW_HEIGHT//10.8))
+RED_HEART_IMG = pygame.image.load(os.path.join("files", "red_heart.png"))
+RED_HEART_IMG = pygame.transform.scale(RED_HEART_IMG, (WINDOW_WIDTH//60, WINDOW_HEIGHT//33.75))
+GRAY_HEART_IMG = pygame.image.load(os.path.join("files", "gray_heart.png"))
+GRAY_HEART_IMG = pygame.transform.scale(GRAY_HEART_IMG, (WINDOW_WIDTH//60, WINDOW_HEIGHT//33.75))
 
 def read_stat(stat):
     with open(os.path.join("files", "stats.json"), "r") as file:
@@ -59,48 +68,75 @@ def save_stat(stat, value):
         json.dump(data, file, indent=4)
 
 def lose(seconds_passed, diff, osh, WIN):
+    LOSE_SOUND.play()
+    
+    WIN.fill(MAIN_COLOR)
+    
     if diff == 1 and osh == False:
         if seconds_passed > read_stat("best_easy_time"):
             save_stat("best_easy_time", seconds_passed)
+            new_highscore_text = MAIN_FONT.render("NEW HIGHSCORE", True, LESS_SMOKED_WHITE)
+            WIN.blit(new_highscore_text, (WINDOW_WIDTH//2 - new_highscore_text.get_width()//2, WINDOW_HEIGHT//2 - new_highscore_text.get_height()*2))
     elif diff == 1 and osh == True:
         if seconds_passed > read_stat("best_easy_time_oneshot"):
             save_stat("best_easy_time_oneshot", seconds_passed)
+            new_highscore_text = MAIN_FONT.render("NEW HIGHSCORE", True, LESS_SMOKED_WHITE)
+            WIN.blit(new_highscore_text, (WINDOW_WIDTH//2 - new_highscore_text.get_width()//2, WINDOW_HEIGHT//2 - new_highscore_text.get_height()*2))
 
     elif diff == 2 and osh == False:
         if seconds_passed > read_stat("best_medium_time"):
             save_stat("best_medium_time", seconds_passed)
+            new_highscore_text = MAIN_FONT.render("NEW HIGHSCORE", True, LESS_SMOKED_WHITE)
+            WIN.blit(new_highscore_text, (WINDOW_WIDTH//2 - new_highscore_text.get_width()//2, WINDOW_HEIGHT//2 - new_highscore_text.get_height()*2))
     elif diff == 2 and osh == True:
         if seconds_passed > read_stat("best_medium_time_oneshot"):
             save_stat("best_medium_time_oneshot", seconds_passed)
+            new_highscore_text = MAIN_FONT.render("NEW HIGHSCORE", True, LESS_SMOKED_WHITE)
+            WIN.blit(new_highscore_text, (WINDOW_WIDTH//2 - new_highscore_text.get_width()//2, WINDOW_HEIGHT//2 - new_highscore_text.get_height()*2))
 
     elif diff == 3 and osh == False:
         if seconds_passed > read_stat("best_hard_time"):
             save_stat("best_hard_time", seconds_passed)
+            new_highscore_text = MAIN_FONT.render("NEW HIGHSCORE", True, LESS_SMOKED_WHITE)
+            WIN.blit(new_highscore_text, (WINDOW_WIDTH//2 - new_highscore_text.get_width()//2, WINDOW_HEIGHT//2 - new_highscore_text.get_height()*2))
     elif diff == 3 and osh == True:
         if seconds_passed > read_stat("best_hard_time_oneshot"):
             save_stat("best_hard_time_oneshot", seconds_passed)
+            new_highscore_text = MAIN_FONT.render("NEW HIGHSCORE", True, LESS_SMOKED_WHITE)
+            WIN.blit(new_highscore_text, (WINDOW_WIDTH//2 - new_highscore_text.get_width()//2, WINDOW_HEIGHT//2 - new_highscore_text.get_height()*2))
 
     elif diff == 4 and osh == False:
         if seconds_passed > read_stat("best_vhard_time"):
             save_stat("best_vhard_time", seconds_passed)
+            new_highscore_text = MAIN_FONT.render("NEW HIGHSCORE", True, LESS_SMOKED_WHITE)
+            WIN.blit(new_highscore_text, (WINDOW_WIDTH//2 - new_highscore_text.get_width()//2, WINDOW_HEIGHT//2 - new_highscore_text.get_height()*2))
     elif diff == 4 and osh == True:
         if seconds_passed > read_stat("best_vhard_time_oneshot"):
             save_stat("best_vhard_time_oneshot", seconds_passed)
+            new_highscore_text = MAIN_FONT.render("NEW HIGHSCORE", True, LESS_SMOKED_WHITE)
+            WIN.blit(new_highscore_text, (WINDOW_WIDTH//2 - new_highscore_text.get_width()//2, WINDOW_HEIGHT//2 - new_highscore_text.get_height()*2))
 
     elif diff == 5 and osh == False:
         if seconds_passed > read_stat("best_extreme_time"):
             save_stat("best_extreme_time", seconds_passed)
+            new_highscore_text = MAIN_FONT.render("NEW HIGHSCORE", True, LESS_SMOKED_WHITE)
+            WIN.blit(new_highscore_text, (WINDOW_WIDTH//2 - new_highscore_text.get_width()//2, WINDOW_HEIGHT//2 - new_highscore_text.get_height()*2))
     elif diff == 5 and osh == True:
         if seconds_passed > read_stat("best_extreme_time_oneshot"):
             save_stat("best_extreme_time_oneshot", seconds_passed)
+            new_highscore_text = MAIN_FONT.render("NEW HIGHSCORE", True, LESS_SMOKED_WHITE)
+            WIN.blit(new_highscore_text, (WINDOW_WIDTH//2 - new_highscore_text.get_width()//2, WINDOW_HEIGHT//2 - new_highscore_text.get_height()*2))
 
     elif diff == 6 and osh == False:
         if seconds_passed > read_stat("best_insane_time"):
             save_stat("best_insane_time", seconds_passed)
+            new_highscore_text = MAIN_FONT.render("NEW HIGHSCORE", True, LESS_SMOKED_WHITE)
+            WIN.blit(new_highscore_text, (WINDOW_WIDTH//2 - new_highscore_text.get_width()//2, WINDOW_HEIGHT//2 - new_highscore_text.get_height()*2))
     elif diff == 6 and osh == True:
         if seconds_passed > read_stat("best_insane_time_oneshot"):
             save_stat("best_insane_time_oneshot", seconds_passed)
-
+            new_highscore_text = MAIN_FONT.render("NEW HIGHSCORE", True, LESS_SMOKED_WHITE)
+            WIN.blit(new_highscore_text, (WINDOW_WIDTH//2 - new_highscore_text.get_width()//2, WINDOW_HEIGHT//2 - new_highscore_text.get_height()*2))
     else:
         print("ER109")
 
@@ -127,10 +163,8 @@ def lose(seconds_passed, diff, osh, WIN):
                     exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    os.startfile(os.path.join('files', 'reshan.pyw'))
+                    os.system(f"start {os.path.join('files', 'reshan.pyw')}")
                     exit()
-
-        WIN.fill(MAIN_COLOR)
 
         you_lost_text = MAIN_FONT.render("You lost", True, SMOKED_WHITE)
         WIN.blit(you_lost_text, (WINDOW_WIDTH - WINDOW_WIDTH//40 - you_lost_text.get_width(), WINDOW_HEIGHT//40))
@@ -170,7 +204,6 @@ def lose(seconds_passed, diff, osh, WIN):
         WIN.blit(bmt_oneshot_text, (WINDOW_WIDTH//40, WINDOW_HEIGHT//40 + oneshot_mode_stats_text.get_height() + normal_mode_stats_text.get_height() + stats_text.get_height() + bet_text.get_height()*7))
         bht_oneshot_text = SMALL_FONT.render(f'Hard: {read_stat("best_hard_time_oneshot")}', True, SMOKED_WHITE)
         WIN.blit(bht_oneshot_text, (WINDOW_WIDTH//40, WINDOW_HEIGHT//40 + oneshot_mode_stats_text.get_height() + normal_mode_stats_text.get_height() + stats_text.get_height() + bet_text.get_height()*8))
-
         bvht_oneshot_text = SMALL_FONT.render(f'V. Hard: {read_stat("best_vhard_time_oneshot")}', True, SMOKED_WHITE)
         WIN.blit(bvht_oneshot_text, (WINDOW_WIDTH//40, WINDOW_HEIGHT//40 + oneshot_mode_stats_text.get_height() + normal_mode_stats_text.get_height() + stats_text.get_height() + bet_text.get_height()*9))
         bext_oneshot_text = SMALL_FONT.render(f'Extreme: {read_stat("best_extreme_time_oneshot")}', True, SMOKED_WHITE)
@@ -180,17 +213,63 @@ def lose(seconds_passed, diff, osh, WIN):
 
         pygame.display.update()
 
-def draw_window(player, bullets_right, bullet_right, bullets_left, bullet_left, PLAYER_HEALTH, seconds_passed, WIN):
+def draw_window(player, bullets_right, bullet_right, bullets_left, bullet_left, PLAYER_HEALTH, seconds_passed, WIN, diff):
     WIN.fill(MAIN_COLOR)
     WIN.blit(PLAYER_IMG, (player.x, player.y))
-
-    hp_text = MAIN_FONT.render("HP " + str(PLAYER_HEALTH), True, WHITE)
-    WIN.blit(hp_text, (WINDOW_WIDTH//40, WINDOW_HEIGHT//16))
 
     timer_text = MAIN_FONT.render("Time: " + str(seconds_passed), True, WHITE)
     WIN.blit(timer_text, (WINDOW_WIDTH//40, WINDOW_HEIGHT//40))
 
-    # WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40, WINDOW_HEIGHT//40))
+    if diff == 1 or diff == 2 or diff == 3 or diff == 4 or diff == 5:
+        if PLAYER_HEALTH ==  5:
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40, WINDOW_HEIGHT//16))
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*1, WINDOW_HEIGHT//16))
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*2, WINDOW_HEIGHT//16))
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*3, WINDOW_HEIGHT//16))
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*4, WINDOW_HEIGHT//16))
+        elif PLAYER_HEALTH ==  4:
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40, WINDOW_HEIGHT//16))
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*1, WINDOW_HEIGHT//16))
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*2, WINDOW_HEIGHT//16))
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*3, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*4, WINDOW_HEIGHT//16))
+        elif PLAYER_HEALTH ==  3:
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40, WINDOW_HEIGHT//16))
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*1, WINDOW_HEIGHT//16))
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*2, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*3, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*4, WINDOW_HEIGHT//16))
+        elif PLAYER_HEALTH ==  2:
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40, WINDOW_HEIGHT//16))
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*1, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*2, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*3, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*4, WINDOW_HEIGHT//16))
+        elif PLAYER_HEALTH ==  1:
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*1, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*2, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*3, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*4, WINDOW_HEIGHT//16))
+        elif PLAYER_HEALTH ==  0:
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*1, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*2, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*3, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*4, WINDOW_HEIGHT//16))
+    elif diff == 6:
+        if PLAYER_HEALTH ==  2:
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40, WINDOW_HEIGHT//16))
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*1, WINDOW_HEIGHT//16))
+        if PLAYER_HEALTH ==  1:
+            WIN.blit(RED_HEART_IMG, (WINDOW_WIDTH//40, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*1, WINDOW_HEIGHT//16))
+        if PLAYER_HEALTH ==  0:
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40, WINDOW_HEIGHT//16))
+            WIN.blit(GRAY_HEART_IMG, (WINDOW_WIDTH//40 + RED_HEART_IMG.get_width()*1, WINDOW_HEIGHT//16))
+    elif diff == 0:
+        debugger_mode_text = MAIN_FONT.render("Debugger mode", True, WHITE)
+        WIN.blit(debugger_mode_text, (WINDOW_WIDTH//40, WINDOW_HEIGHT//16))
 
     for bullet_right in bullets_right:
         pygame.draw.rect(WIN, RED, bullet_right)
@@ -266,20 +345,24 @@ class ConfigMenu(QMainWindow):
             difficulty = 6
         else:
             difficulty = 7
+            
+        if self.debugModeButton.isChecked() == True:
+            difficulty = 0
 
         one_shot = self.oneshotCheckBox.isChecked()
 
         save_stat("current_difficulty", difficulty)
         save_stat("one_shot_enabled", one_shot)
-
-        print(f"Choosen difficulty: {self.diffBox.currentText()} ({difficulty})")
+        
+        if difficulty == 0:
+            print("Debugger mode")
+        else:
+            print(f"Choosen difficulty: {self.diffBox.currentText()} ({difficulty})")
         print(f"One-shot: {one_shot}")
 
         self.close()
         
         main()
-        
-        exit()
 
     def repoSee(self):
         webbrowser.open("https://github.com/vDeresh/Circle_Game", 2, True)
@@ -290,8 +373,8 @@ class ConfigMenu(QMainWindow):
 def show_config_menu():
     APP = QApplication([])
     APP_WINDOW = ConfigMenu()
-    APP.setWindowIcon(QtGui.QIcon(os.path.join('files', 'icon.png')))
-    APP_WINDOW.setWindowIcon(QtGui.QIcon(os.path.join('files', 'icon.png')))
+    APP.setWindowIcon(QtGui.QIcon(os.path.join('files', 'icon.ico')))
+    APP_WINDOW.setWindowIcon(QtGui.QIcon(os.path.join('files', 'icon.ico')))
     APP.exec()
 
 def main():
@@ -305,18 +388,17 @@ def main():
 
     if difficulty == 0:
         PLAYER_SPEED = 10
-        PLAYER_HEALTH = 1000
+        PLAYER_HEALTH = 10000
         BULLET_SPEED = 14
         MAX_BULLETS = 39
-        print("Debugger mode")
     elif difficulty == 1:
         PLAYER_SPEED = 10
-        PLAYER_HEALTH = 10
+        PLAYER_HEALTH = 5
         BULLET_SPEED = 6
         MAX_BULLETS = 15
     elif difficulty == 2:
         PLAYER_SPEED = 10
-        PLAYER_HEALTH = 10
+        PLAYER_HEALTH = 5
         BULLET_SPEED = 8
         MAX_BULLETS = 15
     elif difficulty == 3:
@@ -353,6 +435,7 @@ def main():
     bullets_right = []
     bullets_left = []
 
+    POSITIVE_SOUND.play()
     clock = pygame.time.Clock()
     running = True
     while running: # Główna pętla
@@ -365,6 +448,8 @@ def main():
                 exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    QUIT_SOUND.play()
+                    pygame.time.delay(1000)
                     save_stat("current_difficulty", 7)
                     save_stat("one_shot_enabled", None)
                     pygame.display.quit()
@@ -372,6 +457,7 @@ def main():
                     exit()
             if event.type == PLAYER_WAS_HIT:
                 PLAYER_HEALTH -= 1
+                LASER_SOUND.play()
                 print("-1 HP")
 
         ticks_passed += 1
@@ -394,7 +480,7 @@ def main():
 
         handle_bullets(bullets_right, bullet_right, bullets_left, bullet_left, player, BULLET_SPEED) # Linia 45
 
-        draw_window(player, bullets_right, bullet_right, bullets_left, bullet_left, PLAYER_HEALTH, seconds_passed, WIN) # Linia 28
+        draw_window(player, bullets_right, bullet_right, bullets_left, bullet_left, PLAYER_HEALTH, seconds_passed, WIN, difficulty) # Linia 28
 
         if PLAYER_HEALTH <= 0:
             running = False
