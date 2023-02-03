@@ -8,7 +8,7 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 - Run `installer.bat`
 
 # How to play
-- Simply run start.pyw
+- Open cmd and type `python game.py`
 - Choose a [difficulty level](https://github.com/vDeresh/Circle_Game/wiki/Home/_edit#difficulty-levels) and optional [special modes](https://github.com/vDeresh/Circle_Game/wiki#special-modes)
 - Click `Play` button
 
