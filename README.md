@@ -18,7 +18,7 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 - Few other improvements
 
 # Known issues
-- None
+- Weird text box in config menu (fixed in next update (forgot about it before uploading XD))
 
 # Version plans
 
