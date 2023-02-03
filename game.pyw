@@ -43,10 +43,6 @@ PLAYER_WAS_HIT = pygame.USEREVENT + 1
 # Tekstury
 PLAYER_IMG = pygame.image.load(os.path.join("files", "player_circle.png"))
 PLAYER_IMG = pygame.transform.scale(PLAYER_IMG, (WINDOW_WIDTH//19.2, WINDOW_HEIGHT//10.8))
-RED_HEART_IMG = pygame.image.load(os.path.join("files", "red_heart.png"))
-RED_HEART_IMG = pygame.transform.scale(RED_HEART_IMG, (WINDOW_WIDTH//120, WINDOW_HEIGHT//67.5))
-GRAY_HEART_IMG = pygame.image.load(os.path.join("files", "red_heart.png"))
-GRAY_HEART_IMG = pygame.transform.scale(GRAY_HEART_IMG, (16, 16))
 
 def read_stat(stat):
     with open(os.path.join("files", "stats.json"), "r") as file:
