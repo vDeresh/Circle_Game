@@ -4,7 +4,13 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 # How to install
 - [Download](https://github.com/vDeresh/Circle_Game/archive/refs/heads/v1.0.zip) game files
 - Extract files
-- Run `installer64.bat` if you have 64-bit system or run `installer32.bat` if you have 32-bit system
+- Run `python_64.bat` if you have 64-bit system or run `python_32.bat` if you have 32-bit system to install Python 3.10.9 (you can skip this step if you have already downloaded Python 3.10.9)
+- Run `installer.bat`
+
+# How to play
+- Simply run start.pyw
+- Choose a difficulty level and optional [special modes](https://github.com/vDeresh/Circle_Game/wiki#special-modes)
+- Click `Play` button
 
 # Known issues
 - After restarting the game, a blank screen appears (fixed in the next version)
