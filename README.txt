@@ -4,7 +4,7 @@ HOW TO INSTALL
 - Run `installer.bat`
 
 HOW TO PLAY
-- Simply run start.pyw
+- Open cmd and type `python game.py`
 - Choose a difficulty level and optional special modes
 - Click Play button
 
