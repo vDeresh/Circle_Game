@@ -2,6 +2,11 @@ import pygame
 import os
 import random
 import json
+import webbrowser
+import sys
+from PyQt5.QtWidgets import *
+from PyQt5 import uic
+from PyQt5 import QtGui
 
 pygame.init()
 pygame.font.init()
@@ -72,37 +77,37 @@ def lose(seconds_passed, diff, osh, WIN):
     elif diff == 2 and osh == True:
         if seconds_passed > read_stat("best_medium_time_oneshot"):
             save_stat("best_medium_time_oneshot", seconds_passed)
-            
+
     elif diff == 3 and osh == False:
         if seconds_passed > read_stat("best_hard_time"):
             save_stat("best_hard_time", seconds_passed)
     elif diff == 3 and osh == True:
         if seconds_passed > read_stat("best_hard_time_oneshot"):
             save_stat("best_hard_time_oneshot", seconds_passed)
-            
+
     elif diff == 4 and osh == False:
         if seconds_passed > read_stat("best_vhard_time"):
             save_stat("best_vhard_time", seconds_passed)
     elif diff == 4 and osh == True:
         if seconds_passed > read_stat("best_vhard_time_oneshot"):
             save_stat("best_vhard_time_oneshot", seconds_passed)
-            
+
     elif diff == 5 and osh == False:
         if seconds_passed > read_stat("best_extreme_time"):
             save_stat("best_extreme_time", seconds_passed)
     elif diff == 5 and osh == True:
         if seconds_passed > read_stat("best_extreme_time_oneshot"):
             save_stat("best_extreme_time_oneshot", seconds_passed)
-            
+
     elif diff == 6 and osh == False:
         if seconds_passed > read_stat("best_insane_time"):
             save_stat("best_insane_time", seconds_passed)
     elif diff == 6 and osh == True:
         if seconds_passed > read_stat("best_insane_time_oneshot"):
             save_stat("best_insane_time_oneshot", seconds_passed)
-            
+
     else:
-        print("There was an error with detecting difficulty")
+        print("ER109")
 
     print("You lost")
 
@@ -127,8 +132,8 @@ def lose(seconds_passed, diff, osh, WIN):
                     exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    pygame.time.set_timer(0, 0)
-                    main()
+                    os.startfile(os.path.join('files', 'reshan.pyw'))
+                    exit()
 
         WIN.fill(MAIN_COLOR)
 
@@ -205,17 +210,17 @@ def player_movement(keys_pressed, player, PLAYER_SPEED):
         player.y -= PLAYER_SPEED
     elif keys_pressed[pygame.K_UP] and player.y - PLAYER_SPEED > 0:
         player.y -= PLAYER_SPEED
-        
+
     if keys_pressed[pygame.K_s] and player.y + PLAYER_SPEED + player.height < WINDOW_HEIGHT: # Poruszanie w dół
         player.y += PLAYER_SPEED
     elif keys_pressed[pygame.K_DOWN] and player.y + PLAYER_SPEED + player.height < WINDOW_HEIGHT:
         player.y += PLAYER_SPEED
-        
+
     if keys_pressed[pygame.K_a] and player.x - PLAYER_SPEED > 0: # Poruszanie w lewo
         player.x -= PLAYER_SPEED
     elif keys_pressed[pygame.K_LEFT] and player.x - PLAYER_SPEED > 0:
         player.x -= PLAYER_SPEED
-        
+
     if keys_pressed[pygame.K_d] and player.x + PLAYER_SPEED + player.width < WINDOW_WIDTH: # Poruszanie w prawo
         player.x += PLAYER_SPEED
     elif keys_pressed[pygame.K_RIGHT] and player.x + PLAYER_SPEED + player.width < WINDOW_WIDTH:
@@ -242,20 +247,67 @@ def handle_bullets(bullets_right, bullet_right, bullets_left, bullet_left, playe
         elif bullet_left.x > WINDOW_WIDTH:
             bullets_left.remove(bullet_left)
 
+class ConfigMenu(QMainWindow):
+    def __init__(self):
+        super(ConfigMenu, self).__init__()
+        uic.loadUi(os.path.join('files', 'config_menu.ui'), self)
+        self.playButton.clicked.connect(self.play)
+        self.repoLinkButton.clicked.connect(self.repoSee)
+        self.issueLinkButton.clicked.connect(self.repoIssue)
+        self.show()
+
+    def play(self): # 1 - Easy | 2 - Medium | 3 = Hard | 4 - Very Hard | 5 - Extreme | 6 - Insane
+        if self.diffBox.currentText() == "Easy":
+            difficulty = 1
+        elif self.diffBox.currentText() == "Medium":
+            difficulty = 2
+        elif self.diffBox.currentText() == "Hard":
+            difficulty = 3
+        elif self.diffBox.currentText() == "V. Hard":
+            difficulty = 4
+        elif self.diffBox.currentText() == "Extreme":
+            difficulty = 5
+        elif self.diffBox.currentText() == "Insane":
+            difficulty = 6
+        else:
+            difficulty = 7
+
+        one_shot = self.oneshotCheckBox.isChecked()
+
+        save_stat("current_difficulty", difficulty)
+        save_stat("one_shot_enabled", one_shot)
+
+        print(f"Choosen difficulty: {self.diffBox.currentText()} ({difficulty})")
+        print(f"One-shot: {one_shot}")
+
+        self.close()
+        
+        main()
+        
+        exit()
+
+    def repoSee(self):
+        webbrowser.open("https://github.com/vDeresh/Circle_Game", 2, True)
+
+    def repoIssue(self):
+        webbrowser.open("https://github.com/vDeresh/Circle_Game/issues", 2, True)
+
+def show_config_menu():
+    APP = QApplication([])
+    APP_WINDOW = ConfigMenu()
+    APP.setWindowIcon(QtGui.QIcon(os.path.join('files', 'icon.png')))
+    APP_WINDOW.setWindowIcon(QtGui.QIcon(os.path.join('files', 'icon.png')))
+    APP.exec()
+
 def main():
     difficulty = read_stat("current_difficulty")
     one_shot = read_stat("one_shot_enabled")
 
     if difficulty == 7 or one_shot == None:
-        os.startfile("start.pyw")
-        pygame.quit()
-        while True:
-            if difficulty != 7 or None:
-                pygame.init()
-                break
+        show_config_menu()
 
     ticks_passed = 0
-    
+
     if difficulty == 0:
         PLAYER_SPEED = 10
         PLAYER_HEALTH = 1000
