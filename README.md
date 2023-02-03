@@ -1,6 +1,3 @@
-# Version 1.1 has critical bug!
-- It will be fixed today
-
 # Circle Game
 A simple 2D bullet dodging game. I'm not an advanced programmer and just learning so any advice would be greatly appreciated! Also English is not my native language so sorry if I make a mistake.
 
@@ -22,7 +19,7 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 - Few other improvements
 
 # Known issues
-- Weird text box in config menu (fixed in next update (forgot about it before uploading XD))
+- None
 
 # Version plans
 
