@@ -16,7 +16,7 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 - Choose a [difficulty level](https://github.com/vDeresh/Circle_Game/wiki/Home/#difficulty-levels) and optional [special modes](https://github.com/vDeresh/Circle_Game/wiki#special-modes)
 - Click `Play` button
 
-# Whats new?
+# Whats new? (v1.1)
 - Bugs fixed
 - Config window update
 - Few other improvements
@@ -28,12 +28,10 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 
 ### Version 1.2 plans
 - Heart icons instead of HP numeric display
-
-### Version 1.3 plans
 - Add soundtrack
 - Add sound effects
 
-### Version 1.4 plans
+### Version 1.3 plans
 - Powerups
 
 ### Other version plans
