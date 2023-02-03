@@ -20,7 +20,8 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 
 ### Version 1.1 coming soon!
 - Bugs fixed
-- Few improvements
+- Config window update
+- Few other improvements
 
 ### Version 1.2 plans
 - Heart icons instead of HP numeric display
