@@ -7,7 +7,7 @@ Windows can show warning after running .bat files but you can just click More in
 
 
 HOW TO PLAY
-- Simply run start.pyw
+- Simply run game.pyw
 - Choose a difficulty level and optional special modes
 - Click Play button
 
