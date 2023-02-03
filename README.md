@@ -2,7 +2,7 @@
 A simple 2D bullet dodging game. I'm not an advanced programmer and just learning so any advice would be greatly appreciated! Also English is not my native language so sorry if I make a mistake.
 
 # How to install
-- [Download](https://github.com/vDeresh/Circle_Game/archive/refs/heads/v1.1.zip) game files
+- [Download](https://github.com/vDeresh/Circle_Game/archive/refs/heads/v1.2.zip) game files
 - Extract files
 - Run `python_64.bat` if you have 64-bit system or run `python_32.bat` if you have 32-bit system to install Python 3.10.9 (you can skip this step if you have already downloaded Python 3.10.9)
 
@@ -18,17 +18,13 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 
 # Whats new? (v1.1)
 - Bugs fixed
-- Config window update
-- Few other improvements
+- Added sound effects
+- Changed HP numeric display to heart icons 
 
 # Known issues
 - None
 
-### Version 1.2 coming soon!
-- Heart icons instead of HP numeric display
-- Add sound effects
-
-### Version 1.3 plans
+### Version 1.3 coming soon!
 - Powerups
 
 ### Other version plans
