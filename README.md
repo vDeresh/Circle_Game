@@ -31,3 +31,5 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 
 ### Other version plans
 - Multiplayer
+
+# [More info (wiki)](https://github.com/vDeresh/Circle_Game/wiki)
