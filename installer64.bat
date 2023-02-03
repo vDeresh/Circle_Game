@@ -1,4 +1,4 @@
-@echo Click any key to start Python download (Python 3.11.1 64-bit)
+@echo Click any key to start Python download (Python 3.10.9 64-bit)
 @pause>nul
 @start https://www.python.org/ftp/python/3.10.9/python-3.10.9-amd64.exe
 @cls
