@@ -8,20 +8,19 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 - Run `installer.bat`
 
 # How to play
-- Open cmd and type `python game.py`
+- Simply run `start.pyw`
 - Choose a [difficulty level](https://github.com/vDeresh/Circle_Game/wiki/Home/_edit#difficulty-levels) and optional [special modes](https://github.com/vDeresh/Circle_Game/wiki#special-modes)
 - Click `Play` button
 
-# Known issues
-- After restarting the game, a blank screen appears (fixed in the next version)
-- The game window is strangely offset on some monitors (fixed in the next version)
-
-# Version plans
-
-### Version 1.1 coming soon!
+# Whats new?
 - Bugs fixed
 - Config window update
 - Few other improvements
+
+# Known issues
+- None
+
+# Version plans
 
 ### Version 1.2 plans
 - Heart icons instead of HP numeric display
