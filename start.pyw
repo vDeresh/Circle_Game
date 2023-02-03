@@ -5,7 +5,6 @@ import json
 import os
 import webbrowser
 
-# Zapisać ostatnio ustawioną rozdzielczość do stats.json i wczytać ją w XML jako domyślnie ustawioną i to samo z ostatnim poziomem trudności
 
 def read_stat(stat):
     with open(os.path.join("files", "stats.json"), "r") as file:
@@ -57,6 +56,8 @@ class ConfigMenu(QMainWindow):
         self.close()
 
         os.startfile("game.pyw")
+        
+        exit()
 
     def repoSee(self):
         webbrowser.open("https://github.com/vDeresh/Circle_Game", 2, True)

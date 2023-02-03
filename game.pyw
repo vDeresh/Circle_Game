@@ -248,6 +248,11 @@ def main():
 
     if difficulty == 7 or one_shot == None:
         os.startfile("start.pyw")
+        pygame.quit()
+        while True:
+            if difficulty != 7 or None:
+                pygame.init()
+                break
 
     ticks_passed = 0
     
