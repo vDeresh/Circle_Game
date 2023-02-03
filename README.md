@@ -31,7 +31,6 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 
 ### Version 1.2 plans
 - Heart icons instead of HP numeric display
-- Customizable game window size
 
 ### Version 1.3 plans
 - Add soundtrack
@@ -41,6 +40,7 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 - Powerups
 
 ### Other version plans
+- Customizable game window size
 - Multiplayer
 
 # [More info (wiki)](https://github.com/vDeresh/Circle_Game/wiki)
