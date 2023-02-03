@@ -24,11 +24,8 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 # Known issues
 - None
 
-# Version plans
-
-### Version 1.2 plans
+### Version 1.2 coming soon!
 - Heart icons instead of HP numeric display
-- Add soundtrack
 - Add sound effects
 
 ### Version 1.3 plans
