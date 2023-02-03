@@ -1,3 +1,6 @@
+# Critical error
+- This version does not work properly
+
 # Circle Game
 A simple 2D bullet dodging game. I'm not an advanced programmer and just learning so any advice would be greatly appreciated! Also English is not my native language so sorry if I make a mistake.
 
