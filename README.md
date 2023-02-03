@@ -25,7 +25,7 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 - Few other improvements
 
 # Known issues
-- None
+- Game don't work XD
 
 # Version plans
 
