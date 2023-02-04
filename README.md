@@ -1,6 +1,8 @@
 # Circle Game
 A simple 2D bullet dodging game. I'm not an advanced programmer and just learning so any advice would be greatly appreciated! Also English is not my native language so sorry if I make a mistake.
 
+[Download](https://github.com/vDeresh/Circle_Game/archive/refs/heads/v1.3.zip)
+
 # How to play
 - Simply run `Circle game.exe`
 - Choose a [difficulty level](https://github.com/vDeresh/Circle_Game/wiki/Home/#difficulty-levels) and optional [special modes](https://github.com/vDeresh/Circle_Game/wiki#special-modes)
