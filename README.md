@@ -9,7 +9,7 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 # Whats new? (v1.3)
 - Bugs fixed
 - More sound effects
-- Powerups
+- [Powerups](https://github.com/vDeresh/Circle_Game/wiki#powerups)
 - By default, the selected difficulty level is based on the last game played (including optional one-shot mode)
 
 # Known issues
