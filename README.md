@@ -15,6 +15,8 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 # Known issues
 - None
 
+# Version plans
+
 ### Version 1.4 has no plans (yet)
 
 ### Other version plans
