@@ -15,7 +15,7 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 - By default, the selected difficulty level is based on the last game played (including optional one-shot mode)
 
 # Known issues
-- None
+- The .exe file icon is not working (don't really know why)
 
 # Version plans
 
