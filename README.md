@@ -19,7 +19,13 @@ A simple 2D bullet dodging game. I'm not an advanced programmer and just learnin
 
 # Version plans
 
-### Version 1.4 has no plans (yet)
+### Version 1.4 plans
+- Optimization to improve game restart speed
+
+### Backup plans
+- More powerups
+- More difficulty levels
+- More special modes
 
 ### Other version plans
 - Customizable game window size
